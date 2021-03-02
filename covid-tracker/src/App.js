@@ -8,8 +8,8 @@ import {
 } from "@material-ui/core";
 import InfoBox from "./InfoBox";
 import Map from "./Map";
-import Table from "./Table";
 import "./App.css";
+import Table from "./Table";
 
 function App() {
   const [countries, setCountries] = useState([]);
@@ -105,11 +105,13 @@ function App() {
         <Map />
       </div>
       <Card className="app__right">
-        <CardContent />
-
-        <Table />
-        {/* Table */}
-        {/* Graph */}
+        <CardContent>
+          <h3>Live Cases by Country</h3>
+          <Table countries={tableData} />
+          {/* Table */}
+          <h3>Worldwide New Cases</h3>
+          {/* Graph */}
+        </CardContent>
       </Card>
     </div>
   );
