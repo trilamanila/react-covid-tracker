@@ -15,11 +15,13 @@ import LineGraph from "./LineGraph";
 import "leaflet/dist/leaflet.css";
 
 function App() {
-  const [countries, setCountries] = useState([]);
   const [country, setCountry] = useState("worldwide");
   const [countryInfo, setCountryInfo] = useState({});
+  const [countries, setCountries] = useState([]);
+  const [mapCountries, setMapCountries] = useState([]);
   const [tableData, setTableData] = useState([]);
-  const [mapCenter, setMapCenter] = useState({ lat: 34.80746, lng: -49.4796 });
+  // const [casesType, setCasesType] = useState("cases");
+  const [mapCenter, setMapCenter] = useState({ lat: 34.80746, lng: -40.4796 });
   const [mapZoom, setMapZoom] = useState(3);
 
   useEffect(() => {
@@ -32,7 +34,7 @@ function App() {
 
   useEffect(() => {
     const getCountriesData = async () => {
-      await fetch("https://disease.sh/v3/covid-19/countries")
+      fetch("https://disease.sh/v3/covid-19/countries")
         .then(response => response.json())
         .then(data => {
           const countries = data.map(country => ({
@@ -40,9 +42,10 @@ function App() {
             value: country.countryInfo.iso2
           }));
 
-          const sortedData = sortData(data);
-          setTableData(sortedData);
+          let sortedData = sortData(data);
           setCountries(countries);
+          setMapCountries(data);
+          setTableData(sortedData);
         });
     };
 
@@ -51,7 +54,6 @@ function App() {
 
   const onCountryChange = async event => {
     const countryCode = event.target.value;
-    setCountry(countryCode);
 
     const url =
       countryCode === "worldwide"
@@ -78,8 +80,8 @@ function App() {
           <FormControl className="app__dropdown">
             <Select
               variant="outlined"
-              onChange={onCountryChange}
               value={country}
+              onChange={onCountryChange}
             >
               <MenuItem value="worldwide">Worldwide</MenuItem>
               {countries.map(country => (
@@ -88,7 +90,6 @@ function App() {
             </Select>
           </FormControl>
         </div>
-
         <div className="app__stats">
           <InfoBox
             title="Coronavirus Cases"
@@ -108,7 +109,7 @@ function App() {
             total={countryInfo.deaths}
           />
         </div>
-        <Map center={mapCenter} zoom={mapZoom} />
+        <Map countries={mapCountries} center={mapCenter} zoom={mapZoom} />
       </div>
       <Card className="app__right">
         <CardContent>
