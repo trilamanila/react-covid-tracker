@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./Map.css";
 import { MapContainer as LeafletMap, TileLayer, useMap } from "react-leaflet";
+import { showDataOnMap } from "./util";
 
 function ChangeMap({ center, zoom }) {
   const map = useMap();
@@ -8,7 +9,7 @@ function ChangeMap({ center, zoom }) {
   return null;
 }
 
-function Map({ countries, center, zoom }) {
+function Map({ countries, casesType, center, zoom }) {
   const [map, setmap] = useState(null);
   if (map) {
     map.flyTo(center);
@@ -20,6 +21,7 @@ function Map({ countries, center, zoom }) {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         />
+        {showDataOnMap(countries, casesType)}
       </LeafletMap>
     </div>
   );
