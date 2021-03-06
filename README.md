@@ -1,6 +1,6 @@
 # Discord Clone
 
-![Project Image](public/project.jpg)
+![Project Image](/covid-tracker/public/project.jpg)
 
 > Covid Tracker live demo here (https://covid-tracker-25324.web.app)
 
