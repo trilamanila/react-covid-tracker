@@ -1,8 +1,8 @@
 # Discord Clone
 
-![Project Image](public/demo.png)
+![Project Image](public/project.jpg)
 
-> Covid Tracker live demo here (https://covid-tracker-8eaf8.web.app/)
+> Covid Tracker live demo here (https://covid-tracker-25324.web.app)
 
 ---
 
@@ -18,7 +18,7 @@
 
 ## Description
 
-Covid Tracker was created for learning purposes. Google authentication login was through Firebase with unique ID for avatar icon and messages. Backend and database stored with cloud Firestore. Real time live demo deployed with Firebase. BEM naming convention, Flexbox, and Material UI was used for styling. React Leaflet was used for the map data and React Chartjs was used for real time graph data.
+Covid Tracker was created for learning purposes. Google authentication login was through Firebase with unique ID for avatar icon and messages. Backend and database stored with cloud Firestore. Real time live demo deployed with Firebase. BEM naming convention, Flexbox, numeral, and Material UI was used for styling. React Leaflet was used for the map data and React Chartjs was used for real time graph data.
 
 #### Technologies
 
@@ -46,6 +46,22 @@ Covid Tracker was created for learning purposes. Google authentication login was
 ```Javascript
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 const db = firebaseApp.firestore();
+
+const url =
+      countryCode === "worldwide"
+        ? "https://disease.sh/v3/covid-19/all"
+        : `https://disease.sh/v3/covid-19/countries/${countryCode}`;
+
+    await fetch(url)
+      .then(response => response.json())
+      .then(data => {
+        setCountry(countryCode);
+        setCountryInfo(data);
+
+        setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
+        setMapZoom(4);
+      });
+  };
 ```
 
 [Back To The Top](#covid-tracker)
