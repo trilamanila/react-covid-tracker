@@ -18,7 +18,7 @@
 
 ## Description
 
-Covid-19 Tracker was created for learning purposes. Google authentication login was through Firebase with unique ID for avatar icon and messages. Backend and database stored with cloud Firestore. Real time live demo deployed with Firebase. BEM naming convention, Flexbox, numeral, and Material UI was used for styling. React Leaflet was used for the map data and React Chartjs was used for real time graph data.
+Covid-19 Tracker was created for learning purposes. It gave real time data of COVID-19 cases, recovered, and deaths by connecting through an API. Responsive map with interactive circle color indicator. Live demo deployed with Firebase. BEM naming convention, Flexbox, Numeral, and Material UI was used for the styling. React Leaflet was used for the map data and React Chartjs was used for real time graph data.
 
 #### Technologies
 
